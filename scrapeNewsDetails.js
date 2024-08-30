@@ -16,8 +16,9 @@ export async function scrapeNewsDetails() {
       const headline = el.querySelector('.title')?.textContent.trim();
       const newsContent = el.querySelector('.title')?.textContent.trim();
       const link = el.querySelector('.title')?.href;
-
-      return { headline, newsContent, link };
+      const source = el.querySelector('.source set_top')?.textContent.trim();
+    
+      return { headline, newsContent, link , source};
     });
   });
 
@@ -36,23 +37,24 @@ export async function scrapeNewsDetails() {
         if (response && response.result) {
           try {
             const resultObject = JSON.parse(response.result);
-            console.log('Parsed Result Object:', resultObject);
+            // console.log('Parsed Result Object:', resultObject);
 
             if (resultObject.disaster && resultObject.place) {
               validNewsItems.push({
                 headline: newsItems[index].headline,
                 link: newsItems[index].link,
+                source : newsItems[index].source,
                 ...resultObject
               });
             }
           } catch (parseError) {
-            console.error('Error parsing result object:', parseError);
+            // console.error('Error parsing result object:', parseError);
           }
         } else {
-          console.log('API Response contains message or error:', response.message || 'No message provided');
+          // console.log('API Response contains message or error:', response.message || 'No message provided');
         }
       } catch (error) {
-        console.error('Error processing news item:', error);
+        // console.error('Error processing news item:', error);
       }
     }
   }
