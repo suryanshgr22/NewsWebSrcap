@@ -5,20 +5,19 @@ import getInfo from './rapidapi.js';
 export async function scrapeNewsDetails() {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.goto("https://www.ndtv.com/search?searchtext=natural-disaster-india", { waitUntil: 'domcontentloaded' });
+  await page.goto("https://www.bing.com/news/search?q=disaster+news+india&qft=sortbydate%3d%221%22&form=YFNR", { waitUntil: 'domcontentloaded' });
 
   // Scrape only the first 3 news items
   const newsItems = await page.evaluate(() => {
-    const newsElements = document.querySelectorAll('.src_lst-rhs');
+    const newsElements = document.querySelectorAll('.t_t');
     
     // Limit to the first 3 items
     return Array.from(newsElements).slice(0, 3).map(el => {
-      const headline = el.querySelector('.src_itm-ttl a')?.textContent.trim();
-      const newsContent = el.querySelector('.src_itm-txt')?.textContent.trim();
-      const dateTime = el.querySelector('.src_itm-stx')?.textContent.trim();
-      const link = el.querySelector('.src_itm-ttl a')?.href;
+      const headline = el.querySelector('.title')?.textContent.trim();
+      const newsContent = el.querySelector('.title')?.textContent.trim();
+      const link = el.querySelector('.title')?.href;
 
-      return { headline, newsContent, dateTime, link };
+      return { headline, newsContent, link };
     });
   });
 
@@ -43,7 +42,6 @@ export async function scrapeNewsDetails() {
               validNewsItems.push({
                 headline: newsItems[index].headline,
                 link: newsItems[index].link,
-                dateTime: newsItems[index].dateTime,
                 ...resultObject
               });
             }

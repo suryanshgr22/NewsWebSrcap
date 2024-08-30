@@ -8,7 +8,7 @@ function getInfo(newsitem) {
       port: null,
       path: '/gpt4',
       headers: {
-        'x-rapidapi-key': '0a1a9ce7bemsh5aa3d10a5fa48b1p1cf974jsn0ffe15a85ba8',
+        'x-rapidapi-key': '8eddcd1de8msh21c6e0bfacdbc81p1e044cjsn69649bf7cc91',
         'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
         'Content-Type': 'application/json'
       }
