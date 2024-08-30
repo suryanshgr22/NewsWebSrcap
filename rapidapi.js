@@ -8,7 +8,7 @@ function getInfo(newsitem) {
       port: null,
       path: '/gpt4',
       headers: {
-        'x-rapidapi-key': '8eddcd1de8msh21c6e0bfacdbc81p1e044cjsn69649bf7cc91',
+        'x-rapidapi-key': '54021a709bmsh382ff834249424ep1e70c6jsn094b497e771d',
         'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
         'Content-Type': 'application/json'
       }
@@ -41,7 +41,7 @@ function getInfo(newsitem) {
       messages: [
         {
           role: 'user',
-          content: `Please analyze the following news text and identify if it describes a natural disaster. If it does, return a JSON object with exactly two keys: "disaster" (type of disaster) and "place" (location where it occurred). If the news text is not related to any disaster, return only the string "none" without any additional text. Do not include any extra explanations, formatting, or code blocks in the response. Here is the news text: "${newsitem}"`
+          content: `Please analyze the following news text and determine if it describes a natural disaster that occurred in a valid place in India. If it does, return a JSON object with exactly two keys: "disaster" (type of disaster) and "place" (location where it occurred). If the news text does not mention a natural disaster or the place is not a valid location in India, return nothing. Do not include any extra explanations, formatting, or code blocks in the response. Here is the news text: "${newsitem}"`
         }
       ],
       web_access: false

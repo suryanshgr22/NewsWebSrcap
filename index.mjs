@@ -6,27 +6,29 @@ export async function main() {
     const jsonString = await scrapeNewsDetails();
     console.log('Result JSON String:', jsonString);
     console.log('Type of jsonResult:', typeof jsonString);
-    
+
     // Parse the JSON string into an array of objects
     const jsonResult = JSON.parse(jsonString);
 
     if (Array.isArray(jsonResult)) {
       // Filter and modify the array
       const filteredResult = jsonResult
-        .filter(item => item.disaster !== "none" || item.place !== "none")
+        .filter(item => item.disaster.toLowerCase() !== "none" && item.place.toLowerCase() !== "none")
         .map(item => {
-          let placeParts = item.place.split(',').map(part => part.trim());
-          
-          // Check if there are more than one place components
-          if (placeParts.length > 1) {
-            // Keep only the first part and remove "India"
-            placeParts = placeParts.filter(part => part !== "India");
-          }
-          
-          // Update the place in the object
+          // Handle the place field
+          let placeParts = item.place.split(" ").map(part => part.trim());
+
+          let firstPlace = placeParts[0];
+
+          // Handle the disaster field
+          let disasterParts = item.disaster.split(" ").map(part => part.trim());
+          let firstDisaster = disasterParts[0];
+
+          // Update the place and disaster in the object
           return {
             ...item,
-            place: placeParts.join(', ')
+            place: firstPlace,
+            disaster: firstDisaster
           };
         });
 

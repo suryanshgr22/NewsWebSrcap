@@ -5,14 +5,14 @@ import getInfo from './rapidapi.js';
 export async function scrapeNewsDetails() {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.goto("https://www.bing.com/news/search?q=disaster+news+india&qft=sortbydate%3d%221%22&form=YFNR", { waitUntil: 'domcontentloaded' });
+  await page.goto("https://www.bing.com/news/search?q=natural+disaster+news+india&qft=sortbydate%3d%221%22&form=YFNR", { waitUntil: 'domcontentloaded' });
 
   // Scrape only the first 3 news items
   const newsItems = await page.evaluate(() => {
     const newsElements = document.querySelectorAll('.t_t');
     
     // Limit to the first 3 items
-    return Array.from(newsElements).slice(0, 3).map(el => {
+    return Array.from(newsElements).slice(0, 2).map(el => {
       const headline = el.querySelector('.title')?.textContent.trim();
       const newsContent = el.querySelector('.title')?.textContent.trim();
       const link = el.querySelector('.title')?.href;
@@ -46,6 +46,7 @@ export async function scrapeNewsDetails() {
                 source : newsItems[index].source,
                 ...resultObject
               });
+              
             }
           } catch (parseError) {
             // console.error('Error parsing result object:', parseError);
