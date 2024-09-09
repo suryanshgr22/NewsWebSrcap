@@ -79,7 +79,7 @@ License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 Contact
-For any questions or feedback, reach out to Suryansh at: suryanshgr22@example.com.
+For any questions or feedback, reach out to Suryansh at: suryanshgr22@gmail.com.
 ```bash
 
 This `README.md` provides clear instructions for setup, usage, and contribution while outlining the project's purpose and structure. Let me know if you need any additional details!
